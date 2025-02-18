@@ -3,7 +3,6 @@ package com.yandex.practicum.middle_homework_4.data.work_manager
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
-import androidx.work.BackoffPolicy
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
@@ -49,9 +48,8 @@ class WorkManagerServiceImp(
             repeatInterval = repeat,
             repeatIntervalTimeUnit = TimeUnit.MINUTES
         ).setConstraints(constraints = networkConstraints)
-            .setBackoffCriteria(
-                backoffPolicy = BackoffPolicy.LINEAR,
-                backoffDelay = delayed,
+            .setInitialDelay(
+                duration = delayed,
                 timeUnit = TimeUnit.SECONDS
             )
             .build()
